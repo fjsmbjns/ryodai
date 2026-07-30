@@ -1,0 +1,346 @@
+/* ========================================
+   全体リセット
+======================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+}
+
+
+body {
+  background: #222;
+
+  font-family:
+    "Yu Gothic",
+    "Hiragino Kaku Gothic ProN",
+    sans-serif;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* ========================================
+   ゲーム画面
+======================================== */
+
+#game {
+  position: relative;
+
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+
+  max-width: 430px;
+
+  background: #000;
+
+  overflow: hidden;
+}
+
+
+/* ========================================
+   背景
+   ★ 必ず一番後ろ
+======================================== */
+
+#background {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: 0;
+
+  overflow: hidden;
+}
+
+
+#office {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  /*
+    背景の中心位置。
+    上下左右が気になる場合はここを調整。
+  */
+  object-position: center center;
+
+  display: block;
+}
+
+
+/* ========================================
+   キャラクター
+======================================== */
+
+#character-area {
+  position: absolute;
+
+  left: 50%;
+  bottom: 150px;
+
+  transform: translateX(-50%);
+
+  width: 100%;
+  height: 72%;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
+  z-index: 10;
+
+  pointer-events: none;
+}
+
+
+#character-image {
+  display: block;
+
+  max-width: 100%;
+  max-height: 100%;
+
+  object-fit: contain;
+}
+
+
+/* ========================================
+   好感度
+======================================== */
+
+#affection-display {
+  position: absolute;
+
+  top: calc(16px + env(safe-area-inset-top));
+  right: 14px;
+
+  padding: 8px 13px;
+
+  background: rgba(0, 0, 0, 0.68);
+
+  color: #fff;
+
+  font-size: 14px;
+  font-weight: bold;
+
+  border-radius: 20px;
+
+  z-index: 40;
+
+  backdrop-filter: blur(5px);
+}
+
+
+/* ========================================
+   選択肢エリア
+======================================== */
+
+#choices {
+  position: absolute;
+
+  left: 50%;
+  bottom: 225px;
+
+  transform: translateX(-50%);
+
+  width: 90%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+
+  z-index: 30;
+}
+
+
+/* 選択肢ボタン */
+.choice-button {
+  width: 100%;
+
+  padding: 14px 16px;
+
+  border: 1px solid rgba(255, 255, 255, 0.8);
+
+  border-radius: 12px;
+
+  background: rgba(255, 255, 255, 0.93);
+
+  color: #222;
+
+  font-size: 15px;
+  font-weight: 500;
+
+  text-align: center;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.22);
+
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease;
+}
+
+
+.choice-button:active {
+  transform: scale(0.97);
+
+  background: #eee;
+}
+
+
+/* ========================================
+   会話ウィンドウ
+======================================== */
+
+#dialogue-box {
+  position: absolute;
+
+  left: 4%;
+  bottom: calc(14px + env(safe-area-inset-bottom));
+
+  width: 92%;
+
+  min-height: 170px;
+
+  padding:
+    19px
+    20px
+    52px
+    20px;
+
+  background: rgba(0, 0, 0, 0.78);
+
+  border: 1px solid rgba(255, 255, 255, 0.35);
+
+  border-radius: 16px;
+
+  color: #fff;
+
+  z-index: 20;
+
+  backdrop-filter: blur(6px);
+
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+
+/* キャラクター名 */
+#character-name {
+  margin-bottom: 9px;
+
+  font-size: 17px;
+
+  font-weight: bold;
+
+  color: #fff;
+}
+
+
+/* セリフ */
+#dialogue-text {
+  margin: 0;
+
+  color: #fff;
+
+  font-size: 16px;
+
+  line-height: 1.75;
+
+  word-break: break-word;
+}
+
+
+/* ========================================
+   次へボタン
+======================================== */
+
+#next-button {
+  display: none;
+
+  position: absolute;
+
+  right: 15px;
+  bottom: 14px;
+
+  padding: 8px 13px;
+
+  border: none;
+
+  border-radius: 8px;
+
+  background: rgba(255, 255, 255, 0.95);
+
+  color: #222;
+
+  font-size: 14px;
+
+  cursor: pointer;
+}
+
+
+/* ========================================
+   小さいスマホ
+======================================== */
+
+@media (max-width: 360px) {
+
+  #dialogue-box {
+    min-height: 155px;
+
+    padding:
+      16px
+      16px
+      46px
+      16px;
+  }
+
+
+  #dialogue-text {
+    font-size: 14px;
+  }
+
+
+  #character-name {
+    font-size: 16px;
+  }
+
+
+  .choice-button {
+    padding: 12px;
+
+    font-size: 14px;
+  }
+
+
+  #choices {
+    bottom: 205px;
+  }
+
+}
