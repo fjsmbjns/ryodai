@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
+
+  <title>先輩との距離、あと20％。</title>
+
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+  <main id="game">
+
+    <!-- 背景 -->
+    <div id="background">
+      <img
+        id="background-image"
+        src="./images/office.png"
+        alt="オフィス背景"
+      >
+    </div>
+
+    <!-- キャラクター画像 -->
+    <div id="character-area">
+      <img
+        id="character-image"
+        src=""
+        alt=""
+      >
+    </div>
+
+    <!-- 好感度 -->
+    <div id="affection-display">
+      ♡ <span id="affection-value">0</span>%
+    </div>
+
+    <!-- 選択肢 -->
+    <div id="choices"></div>
+
+    <!-- セリフ -->
+    <section id="dialogue-box">
+
+      <div id="character-name"></div>
+
+      <p id="dialogue-text"></p>
+
+      <button id="next-button" type="button">
+        次へ ▶
+      </button>
+
+    </section>
+
+  </main>
+
+  <!-- JavaScriptはこれ1個だけ -->
+  <script src="./script.js"></script>
+
+</body>
+</html>
