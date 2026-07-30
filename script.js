@@ -1,19 +1,20 @@
+"use strict";
+
+
 // ========================================
 // シーンデータ
 // ========================================
 
 const scenes = [
 
-  // =====================
+  // =====================================
   // SCENE 1
-  // =====================
+  // =====================================
+
   {
     id: "scene1",
 
     name: "リョウダイ",
-
-    // リョウダイの画像を入れたら使用
-    // character: "images/ryodai.png",
 
     character: "",
 
@@ -23,7 +24,8 @@ const scenes = [
     choices: [
 
       {
-        text: "ありがとうございます！",
+        text:
+          "ありがとうございます！",
 
         affection: 20,
 
@@ -32,7 +34,8 @@ const scenes = [
       },
 
       {
-        text: "……背、高いですね",
+        text:
+          "……背、高いですね",
 
         affection: 10,
 
@@ -41,7 +44,8 @@ const scenes = [
       },
 
       {
-        text: "できれば静かに仕事したいです",
+        text:
+          "できれば静かに仕事したいです",
 
         affection: 0,
 
@@ -53,9 +57,10 @@ const scenes = [
   },
 
 
-  // =====================
+  // =====================================
   // SCENE 2
-  // =====================
+  // =====================================
+
   {
     id: "scene2",
 
@@ -69,7 +74,8 @@ const scenes = [
     choices: [
 
       {
-        text: "行きます！",
+        text:
+          "行きます！",
 
         affection: 20,
 
@@ -78,7 +84,8 @@ const scenes = [
       },
 
       {
-        text: "え、二人でですか？",
+        text:
+          "え、二人でですか？",
 
         affection: 10,
 
@@ -87,7 +94,8 @@ const scenes = [
       },
 
       {
-        text: "今日はコンビニでいいです",
+        text:
+          "今日はコンビニでいいです",
 
         affection: 0,
 
@@ -99,9 +107,10 @@ const scenes = [
   },
 
 
-  // =====================
+  // =====================================
   // SCENE 3
-  // =====================
+  // =====================================
+
   {
     id: "scene3",
 
@@ -115,7 +124,8 @@ const scenes = [
     choices: [
 
       {
-        text: "別に何でもないです",
+        text:
+          "別に何でもないです",
 
         affection: 20,
 
@@ -124,7 +134,8 @@ const scenes = [
       },
 
       {
-        text: "レイちゃんと仲良いですね",
+        text:
+          "レイちゃんと仲良いですね",
 
         affection: 10,
 
@@ -133,7 +144,8 @@ const scenes = [
       },
 
       {
-        text: "付き合ってるんですか？",
+        text:
+          "付き合ってるんですか？",
 
         affection: 0,
 
@@ -145,9 +157,10 @@ const scenes = [
   },
 
 
-  // =====================
+  // =====================================
   // SCENE 4
-  // =====================
+  // =====================================
+
   {
     id: "scene4",
 
@@ -161,7 +174,8 @@ const scenes = [
     choices: [
 
       {
-        text: "もしかして嫉妬してます？",
+        text:
+          "もしかして嫉妬してます？",
 
         affection: 20,
 
@@ -170,7 +184,8 @@ const scenes = [
       },
 
       {
-        text: "一緒に帰ります？",
+        text:
+          "一緒に帰ります？",
 
         affection: 10,
 
@@ -179,7 +194,8 @@ const scenes = [
       },
 
       {
-        text: "ちょっと怖いです",
+        text:
+          "ちょっと怖いです",
 
         affection: 0,
 
@@ -191,9 +207,10 @@ const scenes = [
   },
 
 
-  // =====================
+  // =====================================
   // SCENE 5
-  // =====================
+  // =====================================
+
   {
     id: "scene5",
 
@@ -217,7 +234,8 @@ const scenes = [
       },
 
       {
-        text: "……本当に？",
+        text:
+          "……本当に？",
 
         affection: 10,
 
@@ -242,7 +260,7 @@ const scenes = [
 
 
 // ========================================
-// 状態
+// ゲーム状態
 // ========================================
 
 let currentSceneIndex = 0;
@@ -253,26 +271,43 @@ let choiceSelected = false;
 
 
 // ========================================
-// HTML取得
+// HTML要素
 // ========================================
 
 const characterImage =
-  document.getElementById("character-image");
+  document.getElementById(
+    "character-image"
+  );
+
 
 const characterName =
-  document.getElementById("character-name");
+  document.getElementById(
+    "character-name"
+  );
+
 
 const dialogueText =
-  document.getElementById("dialogue-text");
+  document.getElementById(
+    "dialogue-text"
+  );
+
 
 const choicesContainer =
-  document.getElementById("choices");
+  document.getElementById(
+    "choices"
+  );
+
 
 const nextButton =
-  document.getElementById("next-button");
+  document.getElementById(
+    "next-button"
+  );
+
 
 const affectionValue =
-  document.getElementById("affection-value");
+  document.getElementById(
+    "affection-value"
+  );
 
 
 // ========================================
@@ -288,7 +323,7 @@ function showScene() {
   choiceSelected = false;
 
 
-  // 名前
+  // キャラクター名
   characterName.textContent =
     scene.name;
 
@@ -304,10 +339,18 @@ function showScene() {
     characterImage.src =
       scene.character;
 
+
     characterImage.style.display =
       "block";
 
-  } else {
+  }
+
+  else {
+
+    characterImage.removeAttribute(
+      "src"
+    );
+
 
     characterImage.style.display =
       "none";
@@ -315,22 +358,28 @@ function showScene() {
   }
 
 
-  // 選択肢初期化
+  // 古い選択肢を消す
   choicesContainer.innerHTML =
     "";
 
 
-  // 次へ非表示
+  // 次へを隠す
   nextButton.style.display =
     "none";
 
 
-  // 選択肢生成
+  // 選択肢を作る
   scene.choices.forEach(
     function(choice) {
 
       const button =
-        document.createElement("button");
+        document.createElement(
+          "button"
+        );
+
+
+      button.type =
+        "button";
 
 
       button.className =
@@ -343,9 +392,12 @@ function showScene() {
 
       button.addEventListener(
         "click",
+
         function() {
 
-          selectChoice(choice);
+          selectChoice(
+            choice
+          );
 
         }
       );
@@ -362,29 +414,34 @@ function showScene() {
 
 
 // ========================================
-// 選択肢クリック
+// 選択肢
 // ========================================
 
 function selectChoice(choice) {
 
   if (choiceSelected) {
+
     return;
+
   }
 
 
   choiceSelected = true;
 
 
-  // 好感度加算
+  // 好感度
   affection +=
     choice.affection;
 
 
   if (affection > 100) {
+
     affection = 100;
+
   }
 
 
+  // 好感度更新
   affectionValue.textContent =
     affection;
 
@@ -394,12 +451,12 @@ function selectChoice(choice) {
     "";
 
 
-  // 返事表示
+  // 返答
   dialogueText.textContent =
     choice.response;
 
 
-  // 次へ
+  // 次へ表示
   nextButton.style.display =
     "block";
 
@@ -407,16 +464,18 @@ function selectChoice(choice) {
 
 
 // ========================================
-// 次へ
+// 次へボタン
 // ========================================
 
 nextButton.addEventListener(
   "click",
+
   function() {
 
     currentSceneIndex++;
 
 
+    // 最終シーン終了
     if (
       currentSceneIndex >=
       scenes.length
@@ -449,6 +508,7 @@ function showEnding() {
     "none";
 
 
+  // HAPPY END
   if (affection >= 80) {
 
     characterName.textContent =
@@ -456,12 +516,16 @@ function showEnding() {
 
 
     dialogueText.innerHTML =
-      "俺、お前のこと好きやけど。<br><br>" +
-      "俺と付き合えばよくない？<br><br>" +
+      "俺、お前のこと好きやけど。" +
+      "<br><br>" +
+      "俺と付き合えばよくない？" +
+      "<br><br>" +
       "♡ HAPPY END ♡";
 
   }
 
+
+  // NORMAL END
   else if (affection >= 40) {
 
     characterName.textContent =
@@ -469,11 +533,14 @@ function showEnding() {
 
 
     dialogueText.innerHTML =
-      "また明日な。<br><br>" +
+      "また明日な。" +
+      "<br><br>" +
       "NORMAL END";
 
   }
 
+
+  // BAD END
   else {
 
     characterName.textContent =
@@ -481,9 +548,12 @@ function showEnding() {
 
 
     dialogueText.innerHTML =
-      "ん？ お前？<br><br>" +
-      "……新しく入った人やろ？<br><br>" +
-      "BAD END<br>" +
+      "ん？ お前？" +
+      "<br><br>" +
+      "……新しく入った人やろ？" +
+      "<br><br>" +
+      "BAD END" +
+      "<br>" +
       "『新しく入った人』";
 
   }
@@ -492,7 +562,7 @@ function showEnding() {
 
 
 // ========================================
-// スタート
+// ゲーム開始
 // ========================================
 
 showScene();
