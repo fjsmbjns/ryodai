@@ -1,5 +1,5 @@
 /* ========================================
-   全体リセット
+   リセット
 ======================================== */
 
 * {
@@ -13,22 +13,18 @@ html,
 body {
   width: 100%;
   height: 100%;
-
-  overflow: hidden;
 }
 
 
 body {
-  background: #222;
+  overflow: hidden;
+
+  background: #111;
 
   font-family:
     "Yu Gothic",
     "Hiragino Kaku Gothic ProN",
     sans-serif;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 
@@ -40,52 +36,45 @@ body {
   position: relative;
 
   width: 100vw;
+
   height: 100vh;
   height: 100dvh;
 
-  max-width: 430px;
+  overflow: hidden;
 
   background: #000;
-
-  overflow: hidden;
 }
 
 
 /* ========================================
    背景
-   ★ 必ず一番後ろ
+   一番後ろ
 ======================================== */
 
 #background {
   position: absolute;
 
-  top: 0;
-  left: 0;
+  inset: 0;
 
   width: 100%;
   height: 100%;
 
-  z-index: 0;
-
   overflow: hidden;
+
+  z-index: 0;
 }
 
 
-#office {
+#background-image {
   position: absolute;
 
-  top: 0;
-  left: 0;
+  inset: 0;
 
   width: 100%;
   height: 100%;
 
   object-fit: cover;
 
-  /*
-    背景の中心位置。
-    上下左右が気になる場合はここを調整。
-  */
   object-position: center center;
 
   display: block;
@@ -99,15 +88,14 @@ body {
 #character-area {
   position: absolute;
 
-  left: 50%;
+  left: 0;
   bottom: 150px;
-
-  transform: translateX(-50%);
 
   width: 100%;
   height: 72%;
 
   display: flex;
+
   justify-content: center;
   align-items: flex-end;
 
@@ -118,7 +106,7 @@ body {
 
 
 #character-image {
-  display: block;
+  display: none;
 
   max-width: 100%;
   max-height: 100%;
@@ -134,28 +122,29 @@ body {
 #affection-display {
   position: absolute;
 
-  top: calc(16px + env(safe-area-inset-top));
-  right: 14px;
+  top: calc(
+    15px + env(safe-area-inset-top)
+  );
 
-  padding: 8px 13px;
+  right: 15px;
 
-  background: rgba(0, 0, 0, 0.68);
+  z-index: 40;
 
-  color: #fff;
+  padding: 8px 14px;
+
+  background: rgba(0, 0, 0, 0.7);
+
+  color: white;
 
   font-size: 14px;
   font-weight: bold;
 
-  border-radius: 20px;
-
-  z-index: 40;
-
-  backdrop-filter: blur(5px);
+  border-radius: 30px;
 }
 
 
 /* ========================================
-   選択肢エリア
+   選択肢
 ======================================== */
 
 #choices {
@@ -169,6 +158,7 @@ body {
   width: 90%;
 
   display: flex;
+
   flex-direction: column;
 
   gap: 10px;
@@ -177,40 +167,37 @@ body {
 }
 
 
-/* 選択肢ボタン */
 .choice-button {
+  display: block;
+
   width: 100%;
 
-  padding: 14px 16px;
+  padding: 15px 16px;
 
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  border: 1px solid
+    rgba(255, 255, 255, 0.8);
 
   border-radius: 12px;
 
-  background: rgba(255, 255, 255, 0.93);
+  background:
+    rgba(255, 255, 255, 0.95);
 
   color: #222;
 
   font-size: 15px;
-  font-weight: 500;
 
   text-align: center;
 
   cursor: pointer;
 
   box-shadow:
-    0 4px 12px rgba(0, 0, 0, 0.22);
-
-  transition:
-    transform 0.15s ease,
-    background 0.15s ease;
+    0 4px 15px
+    rgba(0, 0, 0, 0.25);
 }
 
 
 .choice-button:active {
   transform: scale(0.97);
-
-  background: #eee;
 }
 
 
@@ -222,52 +209,57 @@ body {
   position: absolute;
 
   left: 4%;
-  bottom: calc(14px + env(safe-area-inset-bottom));
+
+  bottom: calc(
+    14px + env(safe-area-inset-bottom)
+  );
 
   width: 92%;
 
-  min-height: 170px;
+  min-height: 175px;
 
   padding:
-    19px
+    20px
     20px
     52px
     20px;
 
-  background: rgba(0, 0, 0, 0.78);
+  background:
+    rgba(0, 0, 0, 0.78);
 
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.4);
 
   border-radius: 16px;
 
-  color: #fff;
+  color: white;
 
   z-index: 20;
 
-  backdrop-filter: blur(6px);
-
   box-shadow:
-    0 6px 20px rgba(0, 0, 0, 0.3);
+    0 6px 25px
+    rgba(0, 0, 0, 0.35);
 }
 
 
 /* キャラクター名 */
-#character-name {
-  margin-bottom: 9px;
 
-  font-size: 17px;
+#character-name {
+  margin-bottom: 10px;
+
+  color: white;
+
+  font-size: 18px;
 
   font-weight: bold;
-
-  color: #fff;
 }
 
 
 /* セリフ */
-#dialogue-text {
-  margin: 0;
 
-  color: #fff;
+#dialogue-text {
+  color: white;
 
   font-size: 16px;
 
@@ -278,7 +270,7 @@ body {
 
 
 /* ========================================
-   次へボタン
+   次へ
 ======================================== */
 
 #next-button {
@@ -289,13 +281,13 @@ body {
   right: 15px;
   bottom: 14px;
 
-  padding: 8px 13px;
+  padding: 9px 14px;
 
   border: none;
 
-  border-radius: 8px;
+  border-radius: 9px;
 
-  background: rgba(255, 255, 255, 0.95);
+  background: white;
 
   color: #222;
 
@@ -309,15 +301,15 @@ body {
    小さいスマホ
 ======================================== */
 
-@media (max-width: 360px) {
+@media screen and (max-width: 360px) {
 
   #dialogue-box {
-    min-height: 155px;
+    min-height: 160px;
 
     padding:
       16px
       16px
-      46px
+      48px
       16px;
   }
 
@@ -332,15 +324,15 @@ body {
   }
 
 
+  #choices {
+    bottom: 205px;
+  }
+
+
   .choice-button {
     padding: 12px;
 
     font-size: 14px;
-  }
-
-
-  #choices {
-    bottom: 205px;
   }
 
 }
